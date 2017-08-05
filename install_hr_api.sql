@@ -17,7 +17,9 @@ END;
 -- we are going to grant the hr_emp_select_role
 -- to pkg_emp_select
 GRANT hr_emp_select_role, hr_backup_role to package pkg_emp_select;
--- now lets build the body.
+-- now lets build the body. we are going to keep this very simple
+-- in later versions, we'll add in passing records. but for now
+-- we are not going to cloud this with more advanced subjects.
 CREATE OR REPLACE PACKAGE BODY hr_api.pkg_emp_select AS
 
     PROCEDURE pGetPhone(pFname  IN      VARCHAR2,
@@ -35,10 +37,18 @@ CREATE OR REPLACE PACKAGE BODY hr_api.pkg_emp_select AS
             pPhone := 'xxx';
         WHEN too_many_rows THEN
             pPhone := 'yyy';
+        WHEN others THEN
+            -- we can add in the help desk error handler later, again this
+            -- is just to demo granting roles to packages.
+            sys.dbms_output.put_line('pGetPhone raised an exception ' || sqlerrm);
         END;
         --
     END pGetPhone;
     --
+    -- this is a very simple procedure, create a backup table using execute
+    -- immediate. (dynamic sql) the only way this procedure is going to work
+    -- is if the package has create any table privilege to be able to
+    -- create a table in another schema.
     PROCEDURE pBackupEmp IS
     -- This is the date string 20170805
     dt  VARCHAR2(8);
@@ -52,6 +62,7 @@ CREATE OR REPLACE PACKAGE BODY hr_api.pkg_emp_select AS
 end pkg_emp_select;
 /
 
+-- now grant execute on the package to usr1.
 grant execute on pkg_emp_select to usr1;
 -- we don't need any roles now that the code is compiled.
 set role none;

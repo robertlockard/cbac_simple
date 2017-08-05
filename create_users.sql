@@ -52,6 +52,8 @@ to hr_api;
 -- using dynamic sql.
 grant create any table to hr_backup_role;
 --
+-- hr_api needs the roles with delegate option (or admin option)
+-- to be able to grant the role to a package.
 grant
     hr_emp_select_role,
     hr_backup_role
@@ -61,6 +63,8 @@ grant
     api_admin_role
 to hr_api;
 --
+-- during normal operating, the hr_api schema does not
+-- need any privileges.
 alter user hr_api
     default role none;
 
