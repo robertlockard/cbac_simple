@@ -68,7 +68,4 @@ to hr_api;
 alter user hr_api
     default role none;
 
--- lock down the inherit privileges.
-REVOKE INHERIT PRIVILEGES ON user usr1 from public;
-grant inherit privileges on user usr1 to hr_api;
 
