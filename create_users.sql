@@ -1,16 +1,23 @@
--- this is going to be my api schema that will
--- have access to the hr objects.
+-- clean up before we start.
 drop user hr_api cascade;
--- this will be my executing user.
 drop user usr1;
 drop role hr_emp_select_role;
 drop role hr_backup_role;
 drop role api_admin_role;
+-- done cleaning up.
 
+-- this is going to be my api schema that will
+-- have access to the hr objects.
 create user hr_api identified by x;
+-- this will be my executing user.
 create user usr1 identified by x;
+-- the hr_emp_select_role will have select in hr.ermployees.
 create role hr_emp_select_role;
+-- the hr_backup_role has create any table privilege. I really don't
+-- like that, but that is what the role needs to create a table in
+-- a diffrent schema.
 create role hr_backup_role;
+-- the api_admin_role has create procedure privilege.
 create role api_admin_role;
 --
 -- the user usr1 will only need create session. after we've created
