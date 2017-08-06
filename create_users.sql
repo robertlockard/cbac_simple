@@ -1,9 +1,29 @@
+-- this assumes you have the hr demo schema loaded.
+
 -- clean up before we start.
-drop user hr_api cascade;
-drop user usr1;
-drop role hr_emp_select_role;
-drop role hr_backup_role;
-drop role api_admin_role;
+declare
+  procedure Drop_User(pUser in varchar2) is
+    User_Doesnt_Exist exception;
+    pragma Exception_Init(User_Doesnt_Exist, -01918);
+  begin
+    execute immediate 'drop user '||pUser||' cascade';
+  exception when User_Doesnt_Exist then null;
+  end Drop_User;
+begin
+  Drop_User('hr_api');
+  Drop_User('usr1');
+end;
+/
+
+declare
+  Role_Doesnt_Exist exception;
+  pragma exception_init(Role_Doesnt_Exist, -01919);
+begin
+  execute immediate 'drop role hr_emp_select_role';
+  execute immediate 'drop role hr_backup_role';
+  execute immediate 'drop role api_admin_role';
+exception when Role_Doesnt_Exist then null;
+end;
 -- done cleaning up.
 
 -- this is going to be my api schema that will
