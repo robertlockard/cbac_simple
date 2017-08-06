@@ -1,6 +1,5 @@
 -- connect as hr_api
 conn hr_api/x@orcl
-revoke invokers rights on hr_api from public;
 
 SET role hr_emp_select_role, api_admin_role, hr_backup_role;
 

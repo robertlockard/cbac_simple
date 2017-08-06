@@ -64,6 +64,7 @@ grant
     select
 on hr.employees to hr_api;
 --
+-- we are going to revoke create session after we are done.
 grant
     create session
 to hr_api;
