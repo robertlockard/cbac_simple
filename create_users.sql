@@ -90,3 +90,7 @@ alter user hr_api
     default role none;
 
 
+alter user hr_api account lock;
+revoke create session from hr_api;
+
+

@@ -3,7 +3,6 @@ conn hr_api/x@orcl
 
 SET role hr_emp_select_role, api_admin_role, hr_backup_role;
 
-
 create or replace package hr_api.pkg_emp_select
 authid current_user AS
     PROCEDURE pGetPhone(pFname  IN      VARCHAR2,
