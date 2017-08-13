@@ -23,7 +23,8 @@ begin
   execute immediate 'drop role hr_backup_role';
   execute immediate 'drop role api_admin_role';
 exception when Role_Doesnt_Exist then null;
-end;
+END;
+/
 -- done cleaning up.
 
 -- this is going to be my api schema that will

@@ -23,7 +23,6 @@ CREATE OR REPLACE PACKAGE BODY hr_api.pkg_emp_select AS
     PROCEDURE pGetPhone(pFname  IN      VARCHAR2,
                         pLname  IN      VARCHAR2,
                         pPhone      OUT VARCHAR2) IS
-    x INTEGER;
     BEGIN
         BEGIN
         SELECT phone_number
